@@ -27,8 +27,8 @@ export default function RootLayout({ children }) {
         <Header />
         {children}
         <Toaster
-          position="top-right"
-          { ...(t) => (
+          position="bottom-right"
+          {...(t) => (
             <ToastBar
               toast={t}
               style={{
