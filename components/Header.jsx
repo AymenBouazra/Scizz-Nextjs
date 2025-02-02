@@ -37,6 +37,8 @@ export default function Header() {
    transition={{ duration: 0.8 }}
    className="w-full fixed top-0 left-0 bg-white/10 backdrop-blur-lg shadow-lg z-50"
   >
+   {/* <h1 className="text-6xl">ADD DOCUMENTATION ? page 404 notfound ? begin JEST ? Deploy to vercel ? </h1> */}
+
    <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
     <Link href="/" className="text-2xl font-bold text-white">
      URL Shortener
@@ -49,13 +51,23 @@ export default function Header() {
       Home
      </Link>
      {isLoggedIn ? (
-      <button
-       onClick={handleLogout}
-       className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-200"
-      >
-       <LogOut size={20} />
-       Logout
-      </button>
+      <>
+       <Link
+        href="/profile"
+        className="text-white hover:text-blue-400 transition duration-200"
+       >
+        Profile
+       </Link>
+       <button
+        onClick={handleLogout}
+        className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-200"
+       >
+        <LogOut size={20} />
+        Logout
+       </button>
+      </>
+
+
      ) : (
       <>
        <Link
