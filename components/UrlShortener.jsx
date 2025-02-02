@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import axios from "axios";
+import { create } from "@/services/url";
 
 export default function UrlShortener() {
   const [originalUrl, setOriginalUrl] = useState("");
@@ -11,9 +11,7 @@ export default function UrlShortener() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/shorten`, {
-        originalUrl,
-      });
+      const response = await create({ originalUrl, token: localStorage.getItem('token_url_shortener') });
 
       setShortenedUrl(response.data.shortenedUrl);
     } catch (error) {
@@ -28,8 +26,8 @@ export default function UrlShortener() {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(shortenedUrl);
-      setShowCopied(true); 
-      setTimeout(() => setShowCopied(false), 2000); 
+      setShowCopied(true);
+      setTimeout(() => setShowCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy URL");
     }
