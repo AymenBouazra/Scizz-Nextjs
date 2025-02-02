@@ -65,8 +65,9 @@ export default function UrlShortener() {
             />
             <button
               type="submit"
-              className="w-full md:w-1/4 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200"
+              className="group relative w-full md:w-1/4 px-6 py-3 bg-[#02a676] text-white font-semibold rounded-lg overflow-hidden z-[3] hover:text-white"
             >
+              <span className="absolute inset-0 bg-[#018a61] transform scale-x-0 origin-left transition-transform duration-500 ease-in-out delay-100 group-hover:scale-x-100 z-[-1]"></span>
               Shorten URL
             </button>
           </form>
