@@ -15,7 +15,6 @@ export default function UrlProfile() {
  const removeUrl = async (id, token) => {
   try {
    const response = await removeUrlFromUser(id, token);
-   console.log(response);
    if (response.status === 200) {
 
     toast.success(response.data.message);

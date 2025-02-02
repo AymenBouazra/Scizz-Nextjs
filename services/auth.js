@@ -23,8 +23,6 @@ const signin = async (data) => {
 
 const forgotPassword = async (data) => {
   try {
-    console.log(data);
-    
     const response = await axiosInstance.post("/auth/forgot-password", data);
     return response.data;
   } catch (error) {

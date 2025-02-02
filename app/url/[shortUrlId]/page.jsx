@@ -12,7 +12,6 @@ export default function ShortenedUrlPage({ params }) {
     const fetchUrl = async () => {
       try {
         const response = await findOne(shortUrlId);
-        console.log(response);
 
         if (response.data?.originalUrl) {
           router.push(response.data.originalUrl);

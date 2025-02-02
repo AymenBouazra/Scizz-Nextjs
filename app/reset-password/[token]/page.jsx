@@ -23,10 +23,7 @@ export default function ResetPasswordPage({ params }) {
 
     try {
       setIsLoading(true);
-      console.log({ password, token });
-
       const response = await resetPassword({ password, token });
-
       if (response.status === 200) {
         toast.success(response.message);
         router.push("/signin");

@@ -23,8 +23,6 @@ const findOne = async (id) => {
 
 const removeUrlFromUser = async (id, token) => {
   try {
-   console.log(token);
-   
     const response = await http.patch(`/shorten/${id}`, {token});
     return response;
   } catch (error) {
