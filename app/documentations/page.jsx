@@ -234,8 +234,8 @@ const Documentation = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 pt-16 sm:pt-24">
-      <div className="w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 px-0 sm:p-6  pt-16 sm:pt-24">
+      <div className="w-full max-w-6xl px-4 sm:px-6 lg:px-0">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}

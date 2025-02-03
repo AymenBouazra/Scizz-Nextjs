@@ -45,7 +45,7 @@ export default function Header() {
    transition={{ duration: 0.8 }}
    className="w-full fixed top-0 left-0 bg-white/10 backdrop-blur-lg shadow-lg z-[1]"
   >
-   <div className="max-w-6xl mx-auto py-4 px-4 flex items-center justify-between">
+   <div className="max-w-6xl mx-auto py-4 px-4 lg:px-4 xl:px-0 flex items-center justify-between">
     <Link href="/" className="text-2xl font-bold text-white">
      <img src={brand.src} alt="Logo" className="w-32" />
     </Link>
