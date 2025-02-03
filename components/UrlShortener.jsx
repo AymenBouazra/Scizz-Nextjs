@@ -1,30 +1,34 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { create } from "@/services/url";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import brand_icon from "../assets/img/scizz-icon.svg?url";
+import { useLocalStorage } from "@/utils/localstorage";
 
 export default function UrlShortener() {
+  const [token, setToken] = useState(null);
   const [originalUrl, setOriginalUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
   const [showCopied, setShowCopied] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setIsLoading(true);
-      const response = await create({ originalUrl, token: localStorage.getItem('token_url_shortener') });
-      if (response.status === 201) {
+      const response = await create({ originalUrl, token });
+      if (response.data && response.data.status === 201) {
+
         setIsLoading(false);
         toast.success(response.data.message);
         setShortenedUrl(response.data.response.shortenedUrl);
         setErrors([]);
       } else if (response.data && response.data.status === 302) {
         setIsLoading(false);
-        toast.success(response.data.response.message);
+        toast.error(response.data.response.message);
         setShortenedUrl(response.data.response.shortenedUrl);
         setErrors([]);
       } else if (response.response && response.response.status === 400) {
@@ -51,6 +55,15 @@ export default function UrlShortener() {
       console.error("Failed to copy URL");
     }
   };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const item = localStorage.getItem('token_url_shortener');
+      console.log(item);
+
+      setToken(item)
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 flex flex-col items-center justify-center p-6 pt-28">
@@ -132,9 +145,12 @@ export default function UrlShortener() {
                 </button>
               </div>
               <div>
-                <div className="text-yellow-400 text-xs sm:text-sm mt-2">
-                  Save your created links to access them later by logging in to your account.
-                </div>
+                {
+                  !token &&
+                  <div className="text-yellow-400 text-xs sm:text-sm mt-2">
+                    Save your created links to access them later by logging in to your account.
+                  </div>
+                }
               </div>
 
               {showCopied && (
