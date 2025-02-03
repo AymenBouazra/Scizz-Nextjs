@@ -4,37 +4,43 @@ import { motion } from "framer-motion";
 import { create } from "@/services/url";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import brand_icon from "../assets/img/scizz-icon.svg?url";
 
 export default function UrlShortener() {
   const [originalUrl, setOriginalUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
   const [showCopied, setShowCopied] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState([]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLoading(true);
       const response = await create({ originalUrl, token: localStorage.getItem('token_url_shortener') });
-      setShortenedUrl(response.data.shortenedUrl);
-
       if (response.status === 201) {
+        setIsLoading(false);
         toast.success(response.data.message);
         setShortenedUrl(response.data.response.shortenedUrl);
-      } else if (response.data.status === 302) {
+        setErrors([]);
+      } else if (response.data && response.data.status === 302) {
+        setIsLoading(false);
         toast.success(response.data.response.message);
         setShortenedUrl(response.data.response.shortenedUrl);
+        setErrors([]);
+      } else if (response.response && response.response.status === 400) {
+        setIsLoading(false);
+        toast.error(response.response.data.message[0]);
+        setErrors(response.response.data.message);
       } else {
+        setIsLoading(false);
+        setErrors([]);
         toast.error('An error occurred while shortening the URL.');
       }
     } catch (error) {
-      if (error.status === 400) {
-        setShortenedUrl(error.response.data.shortenedUrl);
-        toast.error(response.data.message);
-
-      } else {
-        console.error("An error occurred while shortening the URL.");
-      }
+      console.log({ error });
+      toast.error('An error occurred while shortening the URL.');
     }
-  };
+  }
 
   const handleCopy = async () => {
     try {
@@ -54,8 +60,8 @@ export default function UrlShortener() {
         transition={{ duration: 0.8 }}
         className="w-full max-w-6xl text-center"
       >
-        <h1 className="text-6xl font-bold text-white mb-6">
-          Shorten Your Links in Seconds
+        <h1 className="flex flex-col items-center text-4xl font-bold text-white mb-6">
+          Shorten Your Links in Seconds with <span className="text-[#02a676] text-6xl font-bold">Scizz</span>
         </h1>
         <p className="text-xl text-gray-300 mb-12">
           A fast, reliable, and free URL shortener for all your needs. Perfect for social media, emails, and more.
@@ -78,26 +84,40 @@ export default function UrlShortener() {
             />
             <button
               type="submit"
-              className="group relative w-full md:w-1/4 px-6 py-3 bg-[#02a676] text-white font-semibold rounded-lg overflow-hidden z-[3] hover:text-white"
+              disabled={isLoading}
+              className={`group relative w-full px-6 md:w-1/4 py-3 text-white font-semibold rounded-lg overflow-hidden z-[3] ${isLoading ? "cursor-not-allowed bg-[#018a61]" : "bg-[#02a676]"} transition duration-200`}
             >
               <span className="absolute inset-0 bg-[#018a61] transform scale-x-0 origin-left transition-transform duration-500 ease-in-out delay-100 group-hover:scale-x-100 z-[-1]"></span>
-              Shorten URL
+              {isLoading ? (
+                <div role="status" className="flex justify-center items-center w-full gap-3">
+                  <span className="flex items-center justify-center gap-2">
+                    <img src={brand_icon.src} alt="Logo" className="w-6 h-6 animate-pulse" />
+                    <span className="text-white">Scizzing...</span>
+                  </span>
+                  <span className="sr-only">Loading...</span>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center gap-2">
+                  <img src={brand_icon.src} alt="Logo" className="w-6 h-6" />
+                  <span className="text-white">Scizz URL</span>
+                </div>
+              )}
             </button>
           </form>
-          {shortenedUrl && (
+          {errors.length === 0 ? (
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="mt-6 p-4 bg-white/10 rounded-lg relative"
             >
-              <div className="flex items-center justify-between gap-4">
-                <p className="text-lg text-whitetruncate">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+                <p className="text-sm sm:text-lg text-white truncate mb-2 sm:mb-0 break-all">
                   <code>Your short URL is: <b className="underline cursor-pointer" onClick={handleCopy}>{shortenedUrl}</b></code>
                 </p>
                 <button
                   onClick={handleCopy}
-                  className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition duration-200 flex items-center gap-2"
+                  className="w-full sm:w-auto px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition duration-200 flex items-center justify-center gap-2"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -113,11 +133,10 @@ export default function UrlShortener() {
               </div>
               <div>
                 {!localStorage.getItem('token_url_shortener') && (
-                  <div className="text-yellow-400 text-sm mt-2">
+                  <div className="text-yellow-400 text-xs sm:text-sm mt-2">
                     Save your created links to access them later by logging in to your account.
                   </div>
-                )
-                }
+                )}
               </div>
 
               {showCopied && (
@@ -126,13 +145,23 @@ export default function UrlShortener() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="absolute -top-5 right-4 bg-gray-800/50 text-white px-3 py-1 text-sm rounded-lg"
+                  className="absolute -top-5 right-4 bg-gray-800/50 text-white px-3 py-1 text-xs sm:text-sm rounded-lg"
                 >
                   Copied!
                 </motion.div>
               )}
             </motion.div>
-          )}
+          ) :
+            (
+              <div className="flex flex-col items-start mt-3 gap-1">
+                {errors.map((error, index) => (
+                  <span key={index} className="text-red-500 text-bold text-start text-sm p-2 rounded-lg bg-white/60">
+                    {error}
+                  </span>
+                ))}
+              </div>
+            )
+          }
         </motion.div>
       </motion.div>
 
@@ -251,6 +280,6 @@ export default function UrlShortener() {
           </motion.div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
