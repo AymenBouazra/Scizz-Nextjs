@@ -14,7 +14,6 @@ export default function Footer() {
   >
    <div className="max-w-6xl mx-auto py-8 px-4">
     <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-     {/* Brand Section */}
      <div className="flex flex-col items-center md:items-start">
       <Link href="/" className="text-2xl font-bold text-white">
        <img src={brand.src} alt="Logo" className="w-44" />
@@ -24,7 +23,6 @@ export default function Footer() {
       </p>
      </div>
 
-     {/* Quick Links */}
      <div className="flex flex-col items-center md:items-start">
       <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
       <Link
@@ -53,7 +51,6 @@ export default function Footer() {
       </Link>
      </div>
 
-     {/* Contact Info */}
      <div className="flex flex-col items-center md:items-start">
       <h3 className="text-lg font-semibold text-white mb-4">Contact Us</h3>
       <p className="text-gray-300 mb-2">Email: aymenbouazra994@gmail.com</p>
@@ -62,7 +59,6 @@ export default function Footer() {
      </div>
     </div>
 
-    {/* Copyright Section */}
     <div className="border-t border-gray-700 mt-8 pt-8 text-center">
      <p className="text-sm text-gray-300">
       &copy; {new Date().getFullYear()} Scizz. All rights reserved.

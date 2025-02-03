@@ -3,6 +3,8 @@ import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { findOne } from "@/services/url";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function ShortenedUrlPage({ params }) {
   const [urlExists, setUrlExists] = useState('pending');
@@ -38,34 +40,36 @@ export default function ShortenedUrlPage({ params }) {
   if (urlExists === 'not found') {
     return (
       <div
-        className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 flex flex-col items-center justify-center p-6"
+        className="min-h-screen flex flex-col items-center justify-center p-6"
       >
-        <div className="bg-white p-8 rounded-lg shadow-md text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="w-full max-w-md bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl p-8"
+        >
+          <h1 className="text-2xl font-bold text-white mb-4">
             Oops! This URL doesn't exist.
           </h1>
-          <p className="text-gray-600 mb-6">
-            The shortened URL{" "}
-            <span className="font-mono bg-gray-200 px-2 py-1 rounded">
-              {shortUrlId}
-            </span>{" "}
-            doesn't have a corresponding original URL.
+          <p className="text-white mb-6">
+            The shortened URL doesn't have a corresponding original URL.
           </p>
-          <a
+          <Link
             href="/"
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-200"
+            className="group relative whitespace-nowrap w-full px-6 py-3 bg-[#02a676] text-white font-semibold rounded-lg overflow-hidden z-[3] hover:text-white"
           >
-            Go Back Home
-          </a>
-        </div>
+            <span className="absolute inset-0 bg-[#018a61] transform scale-x-0 origin-left transition-transform duration-500 ease-in-out delay-100 group-hover:scale-x-100 z-[-1]"></span>
+            Go back home
+          </Link>
+        </motion.div>
       </div>
     );
   } else if (urlExists === 'pending') {
     return <div
       className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 flex flex-col items-center justify-center p-6"
     >
-      <div className="bg-white p-8 rounded-lg shadow-md text-center">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">
+      <div className="w-full max-w-md bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl p-8">
+        <h1 className="text-2xl font-bold text-white mb-4">
           Searching for URL...
         </h1>
       </div>
@@ -75,8 +79,8 @@ export default function ShortenedUrlPage({ params }) {
     return <div
       className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 flex flex-col items-center justify-center p-6"
     >
-      <div className="bg-white p-8 rounded-lg shadow-md text-center">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">
+      <div className="w-full max-w-md bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl p-8">
+        <h1 className="text-2xl font-bold text-white mb-4">
           Redirecting...
         </h1>
       </div>
