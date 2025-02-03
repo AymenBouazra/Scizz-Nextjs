@@ -104,7 +104,7 @@ export default function UrlShortener() {
               )}
             </button>
           </form>
-          {errors.length === 0 ? (
+          {errors.length === 0 && shortenedUrl.length > 0 ? (
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
