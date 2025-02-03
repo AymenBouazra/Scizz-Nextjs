@@ -24,7 +24,7 @@ export default function Footer() {
      </div>
 
      <div className="flex flex-col items-center md:items-start">
-      <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
+      <h3 className="text-xl font-semibold text-white mb-4">Quick Links</h3>
       <Link
        href="/"
        className="text-gray-300 hover:text-[#02a676] transition duration-200 mb-2"
@@ -54,8 +54,8 @@ export default function Footer() {
      </div>
 
      <div className="flex flex-col items-center md:items-start">
-      <h3 className="text-lg font-semibold text-white mb-4">Contact Us</h3>
-      <p className="text-gray-300 mb-2">Email: aymenbouazra994@gmail.com</p>
+      <h3 className="text-xl font-semibold text-white mb-4">Contact Us</h3>
+      <p className="text-gray-300 mb-2 whitespace-nowrap">Email: aymenbouazra994@gmail.com</p>
       <p className="text-gray-300 mb-2">Phone: +216 (24) 819-992</p>
       <p className="text-gray-300">Address: Manouba, Tunisia</p>
      </div>
