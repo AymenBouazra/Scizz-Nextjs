@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
 import brand from "../assets/img/scizz-brand.svg?url";
 
 export default function Footer() {
+ const isLoggedIn = localStorage.getItem('token_url_shortener');
  return (
   <motion.footer
    initial={{ opacity: 0, y: 50 }}
@@ -37,7 +37,7 @@ export default function Footer() {
       >
        Documentation
       </Link>
-      {localStorage.getItem('token_url_shortener') && (
+      {isLoggedIn && (
        <Link
         href="/profile"
         className="text-gray-300 hover:text-[#02a676] transition duration-200 mb-2"
