@@ -63,10 +63,10 @@ export default function ForgotPasswordPage() {
           <button
             type="submit"
             disabled={isLoading}
-            className={`group relative w-full px-6 py-3 text-white font-semibold rounded-lg overflow-hidden z-[3] ${isLoading ? "cursor-not-allowed bg-blue-800" : "bg-blue-600"
+            className={`group relative w-full px-6 py-3 text-white font-semibold rounded-lg overflow-hidden z-[3] ${isLoading ? "cursor-not-allowed bg-[#018a61]" : "bg-[#02a676]"
               } transition duration-200`}
           >
-            <span className="absolute inset-0 bg-blue-700 transform scale-x-0 origin-left transition-transform duration-500 ease-in-out delay-100 group-hover:scale-x-100 z-[-1]"></span>
+            <span className="absolute inset-0 bg-[#018a61] transform scale-x-0 origin-left transition-transform duration-500 ease-in-out delay-100 group-hover:scale-x-100 z-[-1]"></span>
             {isLoading ? (
               <div role="status" className="flex justify-center items-center w-full gap-3">
                 <svg

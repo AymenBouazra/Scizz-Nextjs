@@ -2,17 +2,17 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { create } from "@/services/url";
+import Link from "next/link";
 
 export default function UrlShortener() {
   const [originalUrl, setOriginalUrl] = useState("");
   const [shortenedUrl, setShortenedUrl] = useState("");
-  const [showCopied, setShowCopied] = useState(false); // State for "Copied" feedback
+  const [showCopied, setShowCopied] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await create({ originalUrl, token: localStorage.getItem('token_url_shortener') });
-
       setShortenedUrl(response.data.shortenedUrl);
     } catch (error) {
       if (error.status === 400) {
@@ -34,7 +34,7 @@ export default function UrlShortener() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 flex flex-col items-center justify-center p-6 pt-28">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -116,9 +116,85 @@ export default function UrlShortener() {
         </motion.div>
       </motion.div>
 
+      {/* New Section: Documentation CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="w-full max-w-6xl mt-24 text-center"
+      >
+        <h2 className="text-4xl font-bold text-white mb-12">
+          Learn More About Scizz
+        </h2>
+        <div className="p-8 bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl">
+          <h3 className="text-2xl font-bold text-white mb-4">
+            Explore Our Documentation
+          </h3>
+          <p className="text-gray-300 mb-6">
+            Discover how to make the most of Scizz with our comprehensive documentation. Learn about advanced features, API integrations, and best practices for URL shortening.
+          </p>
+          <Link
+            href="/documentations"
+            className="inline-block px-6 py-3 bg-[#02a676] text-white font-semibold rounded-lg hover:bg-[#018a61] transition duration-200"
+          >
+            View Documentation
+          </Link>
+        </div>
+      </motion.div>
+
+      {/* Existing "Save Your Links Forever!" Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="w-full max-w-6xl mt-24 text-center"
+      >
+        <h2 className="text-4xl font-bold text-white mb-12">
+          Save Your Links Forever!
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="p-8 bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl"
+          >
+            <h3 className="text-2xl font-bold text-white mb-4">Never Lose a Link</h3>
+            <p className="text-gray-300 mb-6">
+              Create an account to save all your shortened URLs in one place. Access them anytime, anywhere.
+            </p>
+            <Link
+              href="/signup"
+              className="inline-block px-6 py-3 bg-[#02a676] text-white font-semibold rounded-lg hover:bg-[#018a61] transition duration-200"
+            >
+              Sign Up Now
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="p-8 bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl"
+          >
+            <h3 className="text-2xl font-bold text-white mb-4">Manage Your Links</h3>
+            <p className="text-gray-300 mb-6">
+              Already have an account? Log in to view and manage your saved URLs.
+            </p>
+            <Link
+              href="/login"
+              className="inline-block px-6 py-3 bg-[#02a676] text-white font-semibold rounded-lg hover:bg-[#018a61] transition duration-200"
+            >
+              Log In
+            </Link>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Existing "Why Choose Scizz?" Section */}
       <div className="w-full max-w-6xl mt-24 text-center">
         <h2 className="text-4xl font-bold text-white mb-12">
-          Why Choose Our URL Shortener?
+          Why Choose Scizz?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <motion.div
@@ -153,7 +229,7 @@ export default function UrlShortener() {
           >
             <h3 className="text-2xl font-bold text-white mb-4">Free Forever</h3>
             <p className="text-gray-300">
-              Enjoy unlimited URL shortening without any hidden costs or fees.
+              Enjoy unlimited URL shortening without any hidden costs or fees with Scizz.
             </p>
           </motion.div>
         </div>
