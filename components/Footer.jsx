@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import brand from "../assets/img/scizz-brand.svg?url";
 
 export default function Footer() {
- const isLoggedIn = localStorage.getItem('token_url_shortener');
  return (
   <motion.footer
    initial={{ opacity: 0, y: 50 }}
@@ -37,14 +36,6 @@ export default function Footer() {
       >
        Documentation
       </Link>
-      {isLoggedIn && (
-       <Link
-        href="/profile"
-        className="text-gray-300 hover:text-[#02a676] transition duration-200 mb-2"
-       >
-        Profile
-       </Link>
-      )}
       <Link
        href="/signin"
        className="text-gray-300 hover:text-[#02a676] transition duration-200 mb-2"
