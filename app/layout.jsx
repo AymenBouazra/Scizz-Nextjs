@@ -36,7 +36,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header />
-        {children}
+        <div className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 pt-10">
+          {children}
+        </div>
         <Toaster
           position="bottom-right"
           {...(t) => (

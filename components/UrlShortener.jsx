@@ -71,7 +71,6 @@ export default function UrlShortener() {
               Shorten URL
             </button>
           </form>
-
           {shortenedUrl && (
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -81,7 +80,7 @@ export default function UrlShortener() {
             >
               <div className="flex items-center justify-between gap-4">
                 <p className="text-lg text-whitetruncate">
-                  <code>Your short URL is: {shortenedUrl}</code>
+                  <code>Your short URL is: <b className="underline cursor-pointer" onClick={handleCopy}>{shortenedUrl}</b></code>
                 </p>
                 <button
                   onClick={handleCopy}
@@ -114,7 +113,7 @@ export default function UrlShortener() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.3 }}
-                  className="absolute -top-10 right-0 bg-gray-800/50 text-white px-4 py-2 rounded-lg"
+                  className="absolute -top-5 right-4 bg-gray-800/50 text-white px-3 py-1 text-sm rounded-lg"
                 >
                   Copied!
                 </motion.div>

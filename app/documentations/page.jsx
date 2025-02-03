@@ -234,21 +234,29 @@ const Documentation = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 flex flex-col items-center justify-center p-6 pt-24">
+    <div className="min-h-screen  flex flex-col items-center justify-center p-6 pt-24">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white mb-4">Scizz API</h1>
           <p className="text-lg text-purple-300">
             A powerful URL shortening service with user management capabilities
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mb-8 flex space-x-4 justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-8 flex space-x-4 justify-center">
           <button
             onClick={() => setActiveTab('auth')}
-            className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2
+            className={`px-6 py-3 rounded-xl hover:-translate-y-1 font-medium transition-all duration-300 flex items-center gap-2
               ${activeTab === 'auth'
-                ? 'bg-purple-500/20 text-purple-300'
+                ? 'bg-purple-500/60 text-white -translate-y-1'
                 : 'bg-white/5 text-gray-400 hover:bg-white/10'
               }`}
           >
@@ -257,16 +265,16 @@ const Documentation = () => {
           </button>
           <button
             onClick={() => setActiveTab('urls')}
-            className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2
+            className={`px-6 py-3 rounded-xl hover:-translate-y-1 font-medium transition-all duration-300 flex items-center gap-2
               ${activeTab === 'urls'
-                ? 'bg-purple-500/20 text-purple-300'
+                ? 'bg-purple-500/60 text-white -translate-y-1'
                 : 'bg-white/5 text-gray-400 hover:bg-white/10'
               }`}
           >
             <Link2 className="w-4 h-4" />
             URL Management
           </button>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {endpoints[activeTab].map((endpoint, index) => (
@@ -274,7 +282,7 @@ const Documentation = () => {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.2 }}
               className="bg-white/10 backdrop-blur-lg rounded-2xl overflow-hidden hover:bg-white/15 transition-all duration-300"
             >
               <div className="p-6">

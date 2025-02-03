@@ -48,7 +48,6 @@ export default function Header() {
      <img src={brand.src} alt="Logo" className="w-32" />
     </Link>
 
-    {/* Desktop Navigation */}
     <nav className="hidden md:flex items-center gap-6">
      <Link
       href="/"
@@ -99,7 +98,6 @@ export default function Header() {
      )}
     </nav>
 
-    {/* Mobile Menu Toggle Button */}
     <button
      onClick={toggleMobileMenu}
      className="md:hidden text-white focus:outline-none"
@@ -108,7 +106,6 @@ export default function Header() {
     </button>
    </div>
 
-   {/* Mobile Navigation Menu */}
    {isMobileMenuOpen && (
     <motion.div
      initial={{ opacity: 0, y: -20 }}

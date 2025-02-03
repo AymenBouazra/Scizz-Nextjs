@@ -42,19 +42,21 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen flex flex-col items-center justify-center p-6">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="w-full max-w-md bg-white/10 backdrop-blur-lg rounded-xl shadow-2xl p-8"
       >
-        <div className="flex flex-col items-center justify-center gap-4 mb-8">
-          <img
-            src={brand.src}
-            alt="Scizz logo"
-            className="w-40"
-          />
+        <div className="flex flex-col gap-4 mb-6">
+          <div className="flex flex-col items-center justify-center gap-4 mb-8">
+            <img
+              src={brand.src}
+              alt="Scizz logo"
+              className="w-40"
+            />
+          </div>
         </div>
         <h1 className="text-2xl font-bold text-white text-center mb-6">
           Create your account
