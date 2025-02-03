@@ -99,6 +99,14 @@ export default function UrlShortener() {
                   <span className="hidden sm:inline">Copy</span>
                 </button>
               </div>
+              <div>
+                {!localStorage.getItem('token_url_shortener') && (
+                  <div className="text-yellow-400 text-sm mt-2">
+                    Save your created links to access them later by logging in to your account.
+                  </div>
+                )
+                }
+              </div>
 
               {showCopied && (
                 <motion.div
@@ -116,7 +124,6 @@ export default function UrlShortener() {
         </motion.div>
       </motion.div>
 
-      {/* New Section: Documentation CTA */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -142,7 +149,6 @@ export default function UrlShortener() {
         </div>
       </motion.div>
 
-      {/* Existing "Save Your Links Forever!" Section */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -191,7 +197,6 @@ export default function UrlShortener() {
         </div>
       </motion.div>
 
-      {/* Existing "Why Choose Scizz?" Section */}
       <div className="w-full max-w-6xl mt-24 text-center">
         <h2 className="text-4xl font-bold text-white mb-12">
           Why Choose Scizz?
