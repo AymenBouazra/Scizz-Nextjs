@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastBar, Toaster } from "react-hot-toast";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,9 @@ export default function RootLayout({ children }) {
         <Header />
         <div className="min-h-screen bg-gradient-to-br from-blue-900 to-purple-900 pt-10">
           {children}
+          <div className="mt-10">
+            <Footer />
+          </div>
         </div>
         <Toaster
           position="bottom-right"
