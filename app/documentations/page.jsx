@@ -234,15 +234,16 @@ const Documentation = () => {
   };
 
   return (
-    <div className="min-h-screen  flex flex-col items-center justify-center p-6 pt-24">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 pt-16 sm:pt-24">
+      <div className="w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-white mb-4">Scizz API</h1>
-          <p className="text-lg text-purple-300">
+          className="text-center mb-8 sm:mb-12"
+        >
+          <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2 sm:mb-4">Scizz API</h1>
+          <p className="text-sm sm:text-lg text-purple-300">
             A powerful URL shortening service with user management capabilities
           </p>
         </motion.div>
@@ -251,32 +252,33 @@ const Documentation = () => {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-8 flex space-x-4 justify-center">
+          className="mb-6 sm:mb-8 flex flex-row space-x-2 sm:space-x-4 justify-center"
+        >
           <button
             onClick={() => setActiveTab('auth')}
-            className={`px-6 py-3 rounded-xl hover:-translate-y-1 font-medium transition-all duration-300 flex items-center gap-2
-              ${activeTab === 'auth'
+            className={`w-auto px-3 sm:px-6 py-1.5 sm:py-3 rounded-xl hover:-translate-y-1 font-medium transition-all duration-300 flex items-center justify-center gap-2 text-xs sm:text-sm
+      ${activeTab === 'auth'
                 ? 'bg-purple-500/60 text-white -translate-y-1'
                 : 'bg-white/5 text-gray-400 hover:bg-white/10'
               }`}
           >
-            <Book className="w-4 h-4" />
+            <Book className="w-3 h-3 sm:w-6 sm:h-6" />
             Authentication
           </button>
           <button
             onClick={() => setActiveTab('urls')}
-            className={`px-6 py-3 rounded-xl hover:-translate-y-1 font-medium transition-all duration-300 flex items-center gap-2
-              ${activeTab === 'urls'
+            className={`w-auto px-3 sm:px-6 py-1.5 sm:py-3 rounded-xl hover:-translate-y-1 font-medium transition-all duration-300 flex items-center justify-center gap-2 text-xs sm:text-sm
+      ${activeTab === 'urls'
                 ? 'bg-purple-500/60 text-white -translate-y-1'
                 : 'bg-white/5 text-gray-400 hover:bg-white/10'
               }`}
           >
-            <Link2 className="w-4 h-4" />
+            <Link2 className="w-3 h-3 sm:w-6 sm:h-6" />
             URL Management
           </button>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {endpoints[activeTab].map((endpoint, index) => (
             <motion.div
               key={index}
@@ -285,13 +287,13 @@ const Documentation = () => {
               transition={{ delay: index * 0.2 }}
               className="bg-white/10 backdrop-blur-lg rounded-2xl overflow-hidden hover:bg-white/15 transition-all duration-300"
             >
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex items-center gap-3">
+              <div className="p-4 sm:p-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start mb-4">
+                  <div className="flex items-center gap-3 w-full">
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center ${getMethodColor(endpoint.method)}`}>
                       <Code className="w-5 h-5" />
                     </div>
-                    <div>
+                    <div className="flex-grow flex justify-between items-center">
                       <div className={`text-sm p-2 rounded-lg ${getMethodColor(endpoint.method)}`}>
                         {endpoint.method}
                       </div>
@@ -303,12 +305,12 @@ const Documentation = () => {
                   <div>
                     <div className="text-sm text-purple-300">Endpoint:</div>
                     <div className="text-white break-all font-mono py-2">
-                      <code className='bg-gray-800/30 text-white p-2 rounded-lg'>{endpoint.path}</code>
+                      <code className='bg-gray-800/30 text-white p-2 rounded-lg text-xs sm:text-sm'>{endpoint.path}</code>
                     </div>
                   </div>
                   <div>
                     <div className="text-sm text-purple-300">Description:</div>
-                    <div className="text-purple-200 break-all">
+                    <div className="text-purple-200 break-all text-sm sm:text-base">
                       {endpoint.description}
                     </div>
                   </div>
@@ -318,7 +320,7 @@ const Documentation = () => {
                   {endpoint.body && (
                     <div>
                       <div className="text-sm text-purple-300">Request Body:</div>
-                      <div className="text-purple-200 font-mono text-sm">
+                      <div className="text-purple-200 font-mono text-xs sm:text-sm">
                         {endpoint.body}
                       </div>
                     </div>
@@ -328,11 +330,11 @@ const Documentation = () => {
                     {endpoint.responses.map((response, idx) => (
                       <div key={idx} className="mt-2 space-y-1">
                         <div className="flex items-center gap-2">
-                          <span className={`text-sm ${response.color}`}>
+                          <span className={`text-xs sm:text-sm ${response.color}`}>
                             {response.status} - {response.description}
                           </span>
                         </div>
-                        <div className="bg-gray-800/30  text-orange-300 p-2 rounded-lg  font-mono text-sm">
+                        <div className="bg-gray-800/30 text-orange-300 p-2 rounded-lg font-mono text-xs sm:text-sm break-words">
                           {JSON.stringify(response.returns, null, 2)}
                         </div>
                       </div>
