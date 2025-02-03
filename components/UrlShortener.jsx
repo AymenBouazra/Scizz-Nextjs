@@ -132,11 +132,9 @@ export default function UrlShortener() {
                 </button>
               </div>
               <div>
-                {!localStorage.getItem('token_url_shortener') && (
-                  <div className="text-yellow-400 text-xs sm:text-sm mt-2">
-                    Save your created links to access them later by logging in to your account.
-                  </div>
-                )}
+                <div className="text-yellow-400 text-xs sm:text-sm mt-2">
+                  Save your created links to access them later by logging in to your account.
+                </div>
               </div>
 
               {showCopied && (
