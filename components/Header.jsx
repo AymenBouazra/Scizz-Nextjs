@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { LogOut, Menu, X } from "lucide-react"; // Import Menu and X icons for the mobile menu
+import { LogOut, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import brand from "../assets/img/scizz-brand.svg?url";
 
 export default function Header() {
  const [isLoggedIn, setIsLoggedIn] = useState(false);
- const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu toggle
+ const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
  useEffect(() => {
   const token = localStorage.getItem('token_url_shortener');

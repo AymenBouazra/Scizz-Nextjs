@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { create } from "@/services/url";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 export default function UrlShortener() {
   const [originalUrl, setOriginalUrl] = useState("");
@@ -14,9 +15,21 @@ export default function UrlShortener() {
     try {
       const response = await create({ originalUrl, token: localStorage.getItem('token_url_shortener') });
       setShortenedUrl(response.data.shortenedUrl);
+
+      if (response.status === 201) {
+        toast.success(response.data.message);
+        setShortenedUrl(response.data.response.shortenedUrl);
+      } else if (response.data.status === 302) {
+        toast.success(response.data.response.message);
+        setShortenedUrl(response.data.response.shortenedUrl);
+      } else {
+        toast.error('An error occurred while shortening the URL.');
+      }
     } catch (error) {
       if (error.status === 400) {
         setShortenedUrl(error.response.data.shortenedUrl);
+        toast.error(response.data.message);
+
       } else {
         console.error("An error occurred while shortening the URL.");
       }
