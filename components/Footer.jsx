@@ -37,12 +37,14 @@ export default function Footer() {
       >
        Documentation
       </Link>
-      <Link
-       href="/profile"
-       className="text-gray-300 hover:text-[#02a676] transition duration-200 mb-2"
-      >
-       Profile
-      </Link>
+      {localStorage.getItem('token_url_shortener') && (
+       <Link
+        href="/profile"
+        className="text-gray-300 hover:text-[#02a676] transition duration-200 mb-2"
+       >
+        Profile
+       </Link>
+      )}
       <Link
        href="/signin"
        className="text-gray-300 hover:text-[#02a676] transition duration-200 mb-2"
