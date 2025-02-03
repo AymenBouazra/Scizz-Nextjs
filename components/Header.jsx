@@ -4,11 +4,12 @@ import { motion } from "framer-motion";
 import { LogOut, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import brand from "../assets/img/scizz-brand.svg?url";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
  const [isLoggedIn, setIsLoggedIn] = useState(false);
  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+ const router = useRouter();
  useEffect(() => {
   const token = localStorage.getItem('token_url_shortener');
   setIsLoggedIn(!!token);
@@ -17,6 +18,7 @@ export default function Header() {
  const handleLogout = () => {
   localStorage.removeItem('token_url_shortener');
   window.location.reload();
+  router.push('/');
  };
 
  useEffect(() => {
